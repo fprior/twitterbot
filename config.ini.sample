@@ -11,4 +11,7 @@
 ;
 ; Access token secret
 ; access_token_secret = 
+;
+; Ignore tweets from this people
+blacklist = @author1, @author2, @author3, @authorX
 
