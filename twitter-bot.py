@@ -29,6 +29,7 @@ class Config(ConfigSection):
     consumer_secret = ''
     access_token_key = ''
     access_token_secret = ''
+    blacklist = ''
 
 class TwitterBot(object):
     _rt_regex = re.compile(r"^(RT @\w+: )+(?P<tweet>.*)$")
@@ -63,6 +64,10 @@ class TwitterBot(object):
                     # I don't want to RT my own twitts!
                     continue
 
+                if twitt_author in Config.blacklist:
+                    # I don't want to RT my own twitts!
+                    continue
+                    
                 db_id = con.execute("SELECT id FROM twitts WHERE id MATCH ?", [twitt_id])
                 if db_id.fetchall():
                     # We already twitted this!
